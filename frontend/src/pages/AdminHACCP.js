@@ -9,7 +9,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from 'sonner';
-import { Thermometer, ClipboardCheck, Package, Calendar as CalendarIcon, AlertTriangle } from 'lucide-react';
+import { Thermometer, ClipboardCheck, Package, Calendar as CalendarIcon, AlertTriangle, Plus, Trash2, DoorOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SignatureCanvas from 'react-signature-canvas';
 
@@ -345,24 +345,58 @@ export const AdminHACCP = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Label className="text-white mb-2 block">
-                    {activeTab === 'temperature' && 'Equipamento / Alimento'}
-                    {activeTab === 'cleaning' && 'Área / Equipamento'}
+                    {activeTab === 'temperature' && 'Equipamento'}
+                    {activeTab === 'cleaning' && 'Espaço'}
                     {activeTab === 'goods_reception' && 'Produto / Fornecedor'}
                     {activeTab === 'expiry' && 'Produto'}
                   </Label>
-                  <Input
-                    data-testid="haccp-equipment-input"
-                    required
-                    value={formData.equipment_product}
-                    onChange={(e) => setFormData({ ...formData, equipment_product: e.target.value })}
-                    className="bg-[#0f172a] border-[#334155] text-white"
-                    placeholder={
-                      activeTab === 'temperature' ? 'Frigorífico A' :
-                      activeTab === 'cleaning' ? 'Cozinha - Bancada' :
-                      activeTab === 'goods_reception' ? 'Carne - Fornecedor X' :
-                      'Leite'
-                    }
-                  />
+                  {(activeTab === 'temperature' && equipment.length > 0) ? (
+                    <Select 
+                      value={formData.equipment_product} 
+                      onValueChange={(value) => setFormData({ ...formData, equipment_product: value })}
+                    >
+                      <SelectTrigger data-testid="haccp-equipment-select" className="bg-[#0f172a] border-[#334155] text-white">
+                        <SelectValue placeholder="Selecione o equipamento" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {equipment.map((eq) => (
+                          <SelectItem key={eq.equipment_id} value={eq.name}>
+                            {eq.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  ) : (activeTab === 'cleaning' && spaces.length > 0) ? (
+                    <Select 
+                      value={formData.equipment_product} 
+                      onValueChange={(value) => setFormData({ ...formData, equipment_product: value })}
+                    >
+                      <SelectTrigger data-testid="haccp-space-select" className="bg-[#0f172a] border-[#334155] text-white">
+                        <SelectValue placeholder="Selecione o espaço" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {spaces.map((space) => (
+                          <SelectItem key={space.space_id} value={space.name}>
+                            {space.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  ) : (
+                    <Input
+                      data-testid="haccp-equipment-input"
+                      required
+                      value={formData.equipment_product}
+                      onChange={(e) => setFormData({ ...formData, equipment_product: e.target.value })}
+                      className="bg-[#0f172a] border-[#334155] text-white"
+                      placeholder={
+                        activeTab === 'temperature' ? 'Adicione equipamentos primeiro' :
+                        activeTab === 'cleaning' ? 'Adicione espaços primeiro' :
+                        activeTab === 'goods_reception' ? 'Carne - Fornecedor X' :
+                        'Leite'
+                      }
+                    />
+                  )}
                 </div>
 
                 <div>
