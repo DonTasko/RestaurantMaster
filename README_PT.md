@@ -15,13 +15,17 @@
 - ✅ **Gestão de Reservas** - Listar, filtrar, editar e cancelar
 - ✅ **Gestão de Mesas** - Configurar salas e mesas com capacidades
 - ✅ **Módulo HACCP Completo**:
-  - Registo de temperaturas
-  - Checklists de limpeza
+  - **Gestão de Equipamentos** (Frigoríficos, Fornos, etc.)
+  - **Gestão de Espaços** (Cozinha, Armazém, WCs, etc.)
+  - Registo de temperaturas com dropdown de equipamentos
+  - Checklists de limpeza com dropdown de espaços
   - Receção de mercadorias
   - Controlo de validades
   - Assinatura digital
   - Alertas automáticos
 - ✅ **Configurações** - Horários, dias abertos, capacidade
+
+> **💡 Nova Funcionalidade:** Cadastre equipamentos e espaços uma vez e selecione rapidamente nos formulários HACCP através de dropdowns!
 
 ## 🚀 Como Usar
 
