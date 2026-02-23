@@ -19,9 +19,16 @@ const API = `${BACKEND_URL}/api`;
 export const AdminHACCP = () => {
   const [records, setRecords] = useState([]);
   const [alerts, setAlerts] = useState([]);
+  const [equipment, setEquipment] = useState([]);
+  const [spaces, setSpaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('temperature');
+  const [showEquipmentDialog, setShowEquipmentDialog] = useState(false);
+  const [showSpaceDialog, setShowSpaceDialog] = useState(false);
   const signatureRef = useRef(null);
+  
+  const [equipmentForm, setEquipmentForm] = useState({ name: '', type: 'refrigerator', location: '' });
+  const [spaceForm, setSpaceForm] = useState({ name: '', type: 'kitchen' });
   
   const [formData, setFormData] = useState({
     record_type: 'temperature',
@@ -34,6 +41,8 @@ export const AdminHACCP = () => {
   useEffect(() => {
     fetchRecords();
     fetchAlerts();
+    fetchEquipment();
+    fetchSpaces();
   }, []);
 
   const fetchRecords = async () => {
@@ -53,6 +62,70 @@ export const AdminHACCP = () => {
       setAlerts(response.data.alerts || []);
     } catch (error) {
       console.error('Failed to fetch alerts:', error);
+    }
+  };
+
+  const fetchEquipment = async () => {
+    try {
+      const response = await axios.get(`${API}/equipment`);
+      setEquipment(response.data);
+    } catch (error) {
+      console.error('Failed to fetch equipment:', error);
+    }
+  };
+
+  const fetchSpaces = async () => {
+    try {
+      const response = await axios.get(`${API}/spaces`);
+      setSpaces(response.data);
+    } catch (error) {
+      console.error('Failed to fetch spaces:', error);
+    }
+  };
+
+  const createEquipment = async () => {
+    try {
+      await axios.post(`${API}/equipment`, equipmentForm);
+      toast.success('Equipamento criado');
+      setShowEquipmentDialog(false);
+      setEquipmentForm({ name: '', type: 'refrigerator', location: '' });
+      fetchEquipment();
+    } catch (error) {
+      toast.error('Erro ao criar equipamento');
+    }
+  };
+
+  const deleteEquipment = async (id) => {
+    if (!window.confirm('Eliminar este equipamento?')) return;
+    try {
+      await axios.delete(`${API}/equipment/${id}`);
+      toast.success('Equipamento eliminado');
+      fetchEquipment();
+    } catch (error) {
+      toast.error('Erro ao eliminar');
+    }
+  };
+
+  const createSpace = async () => {
+    try {
+      await axios.post(`${API}/spaces`, spaceForm);
+      toast.success('Espaço criado');
+      setShowSpaceDialog(false);
+      setSpaceForm({ name: '', type: 'kitchen' });
+      fetchSpaces();
+    } catch (error) {
+      toast.error('Erro ao criar espaço');
+    }
+  };
+
+  const deleteSpace = async (id) => {
+    if (!window.confirm('Eliminar este espaço?')) return;
+    try {
+      await axios.delete(`${API}/spaces/${id}`);
+      toast.success('Espaço eliminado');
+      fetchSpaces();
+    } catch (error) {
+      toast.error('Erro ao eliminar');
     }
   };
 
