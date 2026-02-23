@@ -55,8 +55,17 @@
 - Cancele reservas se necessário
 
 ### 4. Registos HACCP
+
+**Passo 1 - Configurar Equipamentos e Espaços:**
 1. Vá a "HACCP"
-2. Escolha o tipo de registo (Temperatura, Limpeza, etc.)
+2. Clique em "Equipamentos" (canto superior direito)
+3. Adicione equipamentos como: "Frigorífico 1", "Congelador 2", "Forno Principal"
+4. Clique em "Espaços" 
+5. Adicione espaços como: "Cozinha Principal", "Armazém", "WC Masculino", "WC Feminino"
+
+**Passo 2 - Criar Registos:**
+1. Escolha o tipo de registo (Temperatura, Limpeza, etc.)
+2. **Selecione do dropdown** o equipamento ou espaço (muito mais rápido!)
 3. Preencha os campos obrigatórios
 4. Assine digitalmente no canvas
 5. Clique "Guardar Registo"
