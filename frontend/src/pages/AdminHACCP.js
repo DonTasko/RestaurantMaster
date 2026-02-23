@@ -177,9 +177,130 @@ export const AdminHACCP = () => {
   return (
     <AdminLayout>
       <div data-testid="admin-haccp" className="space-y-6">
-        <div>
-          <h1 className="text-4xl font-heading font-bold text-white uppercase tracking-tight">Módulo HACCP</h1>
-          <p className="text-[#94a3b8] mt-2">Sistema de Segurança Alimentar</p>
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <h1 className="text-4xl font-heading font-bold text-white uppercase tracking-tight">Módulo HACCP</h1>
+            <p className="text-[#94a3b8] mt-2">Sistema de Segurança Alimentar</p>
+          </div>
+          <div className="flex gap-2">
+            <Dialog open={showEquipmentDialog} onOpenChange={setShowEquipmentDialog}>
+              <DialogTrigger asChild>
+                <Button data-testid="manage-equipment-btn" variant="outline" className="bg-[#1e293b] border-[#334155] text-white hover:bg-[#334155]">
+                  <Thermometer className="w-4 h-4 mr-2" />
+                  Equipamentos
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-[#1e293b] border-[#334155] text-white max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle className="text-white">Gerir Equipamentos</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <Input
+                      data-testid="equipment-name-input"
+                      placeholder="Nome (ex: Frigorífico 1)"
+                      value={equipmentForm.name}
+                      onChange={(e) => setEquipmentForm({ ...equipmentForm, name: e.target.value })}
+                      className="bg-[#0f172a] border-[#334155] text-white"
+                    />
+                    <Select value={equipmentForm.type} onValueChange={(value) => setEquipmentForm({ ...equipmentForm, type: value })}>
+                      <SelectTrigger className="bg-[#0f172a] border-[#334155] text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="refrigerator">Frigorífico</SelectItem>
+                        <SelectItem value="freezer">Congelador</SelectItem>
+                        <SelectItem value="oven">Forno</SelectItem>
+                        <SelectItem value="stove">Fogão</SelectItem>
+                        <SelectItem value="other">Outro</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Button data-testid="add-equipment-btn" onClick={createEquipment} className="bg-[#3b82f6] hover:bg-[#2563eb]">
+                      <Plus className="w-4 h-4 mr-1" /> Adicionar
+                    </Button>
+                  </div>
+                  <div className="max-h-60 overflow-y-auto space-y-2">
+                    {equipment.map((eq) => (
+                      <div key={eq.equipment_id} className="flex items-center justify-between bg-[#0f172a] p-3 rounded-md">
+                        <div>
+                          <p className="text-white font-medium">{eq.name}</p>
+                          <p className="text-xs text-[#94a3b8]">{eq.type}</p>
+                        </div>
+                        <Button
+                          data-testid="delete-equipment-btn"
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => deleteEquipment(eq.equipment_id)}
+                          className="text-red-500 hover:text-red-400"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog open={showSpaceDialog} onOpenChange={setShowSpaceDialog}>
+              <DialogTrigger asChild>
+                <Button data-testid="manage-spaces-btn" variant="outline" className="bg-[#1e293b] border-[#334155] text-white hover:bg-[#334155]">
+                  <DoorOpen className="w-4 h-4 mr-2" />
+                  Espaços
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-[#1e293b] border-[#334155] text-white max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle className="text-white">Gerir Espaços</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <Input
+                      data-testid="space-name-input"
+                      placeholder="Nome (ex: Cozinha)"
+                      value={spaceForm.name}
+                      onChange={(e) => setSpaceForm({ ...spaceForm, name: e.target.value })}
+                      className="bg-[#0f172a] border-[#334155] text-white"
+                    />
+                    <Select value={spaceForm.type} onValueChange={(value) => setSpaceForm({ ...spaceForm, type: value })}>
+                      <SelectTrigger className="bg-[#0f172a] border-[#334155] text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="kitchen">Cozinha</SelectItem>
+                        <SelectItem value="storage">Armazém</SelectItem>
+                        <SelectItem value="bathroom">WC</SelectItem>
+                        <SelectItem value="dining">Sala</SelectItem>
+                        <SelectItem value="other">Outro</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Button data-testid="add-space-btn" onClick={createSpace} className="bg-[#3b82f6] hover:bg-[#2563eb]">
+                      <Plus className="w-4 h-4 mr-1" /> Adicionar
+                    </Button>
+                  </div>
+                  <div className="max-h-60 overflow-y-auto space-y-2">
+                    {spaces.map((space) => (
+                      <div key={space.space_id} className="flex items-center justify-between bg-[#0f172a] p-3 rounded-md">
+                        <div>
+                          <p className="text-white font-medium">{space.name}</p>
+                          <p className="text-xs text-[#94a3b8]">{space.type}</p>
+                        </div>
+                        <Button
+                          data-testid="delete-space-btn"
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => deleteSpace(space.space_id)}
+                          className="text-red-500 hover:text-red-400"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
 
         {alerts.length > 0 && (
