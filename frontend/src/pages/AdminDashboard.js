@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { AdminLayout } from '../components/AdminLayout';
 import { Card } from '../components/ui/card';
 import { Calendar, Users, AlertTriangle, TrendingUp } from 'lucide-react';
@@ -9,6 +10,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export const AdminDashboard = () => {
+  const { t } = useTranslation();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -29,28 +31,28 @@ export const AdminDashboard = () => {
 
   const statCards = [
     {
-      title: 'Reservas Hoje',
+      title: t('dashboard.todayReservations'),
       value: stats?.today_reservations || 0,
       icon: Calendar,
       color: '#3b82f6',
       testId: 'stat-today-reservations'
     },
     {
-      title: 'Taxa de Ocupação',
+      title: t('dashboard.occupancyRate'),
       value: `${stats?.occupancy_rate || 0}%`,
       icon: TrendingUp,
       color: '#10b981',
       testId: 'stat-occupancy-rate'
     },
     {
-      title: 'Alertas HACCP',
+      title: t('dashboard.haccpAlerts'),
       value: stats?.haccp_alerts || 0,
       icon: AlertTriangle,
       color: '#f59e0b',
       testId: 'stat-haccp-alerts'
     },
     {
-      title: 'Registos Pendentes',
+      title: t('dashboard.pendingRecords'),
       value: stats?.pending_records || 0,
       icon: Users,
       color: '#f43f5e',
@@ -62,8 +64,8 @@ export const AdminDashboard = () => {
     <AdminLayout>
       <div data-testid="admin-dashboard" className="space-y-6">
         <div>
-          <h1 className="text-4xl font-heading font-bold text-white uppercase tracking-tight">Dashboard</h1>
-          <p className="text-[#94a3b8] mt-2">Visão geral do restaurante</p>
+          <h1 className="text-4xl font-heading font-bold text-white uppercase tracking-tight">{t('dashboard.title')}</h1>
+          <p className="text-[#94a3b8] mt-2">{t('dashboard.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -94,7 +96,7 @@ export const AdminDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="bg-[#1e293b] border-[#334155] p-6">
-            <h3 className="text-xl font-heading font-semibold text-white mb-4 uppercase tracking-wide">Próximas Reservas</h3>
+            <h3 className="text-xl font-heading font-semibold text-white mb-4 uppercase tracking-wide">{t('dashboard.upcomingReservations')}</h3>
             <div className="space-y-3">
               {stats?.upcoming_reservations?.length > 0 ? (
                 stats.upcoming_reservations.map((reservation) => (
@@ -106,7 +108,7 @@ export const AdminDashboard = () => {
                     <div className="flex justify-between items-start">
                       <div>
                         <p className="font-semibold">{reservation.name}</p>
-                        <p className="text-sm text-slate-600">{reservation.guests} pessoas</p>
+                        <p className="text-sm text-slate-600">{reservation.guests} {t('dashboard.people')}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-mono font-semibold">{reservation.date}</p>
@@ -116,37 +118,37 @@ export const AdminDashboard = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-[#64748b] text-center py-8">Nenhuma reserva próxima</p>
+                <p className="text-[#64748b] text-center py-8">{t('reservations.noReservations')}</p>
               )}
             </div>
           </Card>
 
           <Card className="bg-[#1e293b] border-[#334155] p-6">
-            <h3 className="text-xl font-heading font-semibold text-white mb-4 uppercase tracking-wide">Ações Rápidas</h3>
+            <h3 className="text-xl font-heading font-semibold text-white mb-4 uppercase tracking-wide">{t('dashboard.quickActions')}</h3>
             <div className="space-y-3">
               <button
                 data-testid="quick-action-new-reservation"
                 onClick={() => window.location.href = '/admin/reservations'}
                 className="w-full bg-[#3b82f6]/10 border border-[#3b82f6]/20 text-[#3b82f6] hover:bg-[#3b82f6]/20 p-4 rounded-md text-left transition-colors"
               >
-                <p className="font-semibold">Nova Reserva</p>
-                <p className="text-sm opacity-80">Criar manualmente</p>
+                <p className="font-semibold">{t('dashboard.newReservation')}</p>
+                <p className="text-sm opacity-80">{t('dashboard.createManually')}</p>
               </button>
               <button
                 data-testid="quick-action-haccp"
                 onClick={() => window.location.href = '/admin/haccp'}
                 className="w-full bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b] hover:bg-[#f59e0b]/20 p-4 rounded-md text-left transition-colors"
               >
-                <p className="font-semibold">Registos HACCP</p>
-                <p className="text-sm opacity-80">Adicionar registo</p>
+                <p className="font-semibold">{t('dashboard.haccpRecords')}</p>
+                <p className="text-sm opacity-80">{t('dashboard.addRecord')}</p>
               </button>
               <button
                 data-testid="quick-action-tables"
                 onClick={() => window.location.href = '/admin/tables'}
                 className="w-full bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981] hover:bg-[#10b981]/20 p-4 rounded-md text-left transition-colors"
               >
-                <p className="font-semibold">Gestão de Mesas</p>
-                <p className="text-sm opacity-80">Configurar salas e mesas</p>
+                <p className="font-semibold">{t('dashboard.tableManagement')}</p>
+                <p className="text-sm opacity-80">{t('dashboard.configureRooms')}</p>
               </button>
             </div>
           </Card>
