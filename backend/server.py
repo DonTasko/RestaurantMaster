@@ -178,6 +178,28 @@ class HACCPRecordCreate(BaseModel):
     signature: Optional[str] = None
     notes: Optional[str] = None
 
+class Equipment(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    equipment_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    type: str
+    location: Optional[str] = None
+
+class EquipmentCreate(BaseModel):
+    name: str
+    type: str
+    location: Optional[str] = None
+
+class Space(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    space_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    type: str
+
+class SpaceCreate(BaseModel):
+    name: str
+    type: str
+
 class DashboardStats(BaseModel):
     today_reservations: int
     occupancy_rate: float
@@ -517,6 +539,44 @@ async def cancel_reservation(reservation_id: str, current_user: dict = Depends(g
         raise HTTPException(status_code=404, detail="Reservation not found")
     
     return {'message': 'Reservation cancelled successfully'}
+
+# Equipment routes
+@api_router.get("/equipment", response_model=List[Equipment])
+async def get_equipment(current_user: dict = Depends(get_current_user)):
+    equipment = await db.equipment.find({}, {'_id': 0}).to_list(1000)
+    return equipment
+
+@api_router.post("/equipment", response_model=Equipment)
+async def create_equipment(equipment_data: EquipmentCreate, current_user: dict = Depends(get_current_user)):
+    equipment = Equipment(**equipment_data.model_dump())
+    await db.equipment.insert_one(equipment.model_dump())
+    return equipment
+
+@api_router.delete("/equipment/{equipment_id}")
+async def delete_equipment(equipment_id: str, current_user: dict = Depends(get_current_user)):
+    result = await db.equipment.delete_one({'equipment_id': equipment_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Equipment not found")
+    return {'message': 'Equipment deleted successfully'}
+
+# Space routes
+@api_router.get("/spaces", response_model=List[Space])
+async def get_spaces(current_user: dict = Depends(get_current_user)):
+    spaces = await db.spaces.find({}, {'_id': 0}).to_list(1000)
+    return spaces
+
+@api_router.post("/spaces", response_model=Space)
+async def create_space(space_data: SpaceCreate, current_user: dict = Depends(get_current_user)):
+    space = Space(**space_data.model_dump())
+    await db.spaces.insert_one(space.model_dump())
+    return space
+
+@api_router.delete("/spaces/{space_id}")
+async def delete_space(space_id: str, current_user: dict = Depends(get_current_user)):
+    result = await db.spaces.delete_one({'space_id': space_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Space not found")
+    return {'message': 'Space deleted successfully'}
 
 # HACCP routes
 @api_router.get("/haccp", response_model=List[HACCPRecord])
