@@ -1,0 +1,183 @@
+{
+  "identity": {
+    "name": "E1 - The Performance Pro",
+    "core_philosophy": "Fusion of Swiss Authority and Kitchen Efficiency. Every pixel must serve the chef's eye.",
+    "emotional_tone": "Professional, Sterile (Clean), Kinetic (Fast), Trusted"
+  },
+  "typography": {
+    "fonts": {
+      "headings": {
+        "family": "Oswald, sans-serif",
+        "weights": ["500", "700"],
+        "usage": "Table Numbers, Zone Names, Critical Alerts, Hero Headings",
+        "description": "Compressed and authoritative, reminiscent of kitchen tickets and industrial signage."
+      },
+      "body": {
+        "family": "Inter, sans-serif",
+        "weights": ["400", "500", "600"],
+        "usage": "General UI, Forms, Instructions",
+        "description": "Invisible and highly legible at small sizes (mobile)."
+      },
+      "data": {
+        "family": "Manrope, sans-serif",
+        "weights": ["500", "700"],
+        "usage": "Temperatures, Dates, Prices, Timers",
+        "description": "Modern geometric digits that align perfectly in tables."
+      }
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl font-bold tracking-tight uppercase",
+      "h2": "text-2xl md:text-3xl font-semibold tracking-tight",
+      "h3": "text-xl font-medium tracking-wide",
+      "body_lg": "text-lg leading-relaxed",
+      "body_base": "text-base leading-normal",
+      "caption": "text-xs font-mono uppercase tracking-widest text-muted-foreground"
+    }
+  },
+  "colors": {
+    "mode": "dark",
+    "palette": {
+      "base": {
+        "background": "#0f172a",
+        "surface": "#1e293b",
+        "surface_highlight": "#334155",
+        "border": "#334155"
+      },
+      "brand": {
+        "primary": "#3b82f6",
+        "primary_foreground": "#ffffff",
+        "accent": "#f59e0b"
+      },
+      "signals": {
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "error": "#f43f5e",
+        "info": "#3b82f6"
+      },
+      "text": {
+        "primary": "#f8fafc",
+        "secondary": "#94a3b8",
+        "muted": "#64748b"
+      }
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(to bottom, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 1) 100%)",
+      "glass": "linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%)",
+      "active_zone": "linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 100%)"
+    }
+  },
+  "layout_strategy": {
+    "grid_system": {
+      "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6",
+      "bento_dashboard": {
+        "main_stat": "col-span-1 md:col-span-3 row-span-1",
+        "chart_area": "col-span-1 md:col-span-9 row-span-2",
+        "list_feed": "col-span-1 md:col-span-4 row-span-2"
+      }
+    },
+    "spacing": {
+      "container_padding": "p-4 md:p-8",
+      "section_gap": "gap-8",
+      "element_gap": "gap-3"
+    },
+    "z_index": {
+      "modal": 50,
+      "sticky_nav": 40,
+      "dropdown": 30,
+      "floor_plan_overlay": 20
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground h-12 px-6 rounded-md hover:bg-primary/90 font-medium transition-all shadow-[0_4px_14px_0_rgba(59,130,246,0.39)]",
+      "secondary": "bg-surface border border-border text-foreground h-12 px-6 rounded-md hover:bg-surface_highlight transition-all",
+      "ghost": "hover:bg-accent/10 hover:text-accent h-10 px-4 rounded-md transition-colors",
+      "destructive": "bg-destructive/10 text-destructive border border-destructive/20 hover:bg-destructive/20"
+    },
+    "cards": {
+      "base": "bg-surface border border-border rounded-lg shadow-sm p-5",
+      "ticket": "bg-white text-slate-900 border-l-4 border-l-primary rounded-r-md shadow-md font-mono relative after:content-[''] after:absolute after:top-1/2 after:-left-2 after:w-4 after:h-4 after:bg-background after:rounded-full after:-translate-y-1/2",
+      "haccp_item": "flex items-center justify-between p-4 border-b border-border/50 last:border-0 hover:bg-surface_highlight/50 transition-colors cursor-pointer"
+    },
+    "inputs": {
+      "base": "h-12 bg-background border border-input rounded-md px-4 text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-muted-foreground/50",
+      "search": "pl-10 h-11 bg-surface/50 border-transparent focus:bg-background"
+    },
+    "navigation": {
+      "mobile_bottom": "fixed bottom-0 left-0 right-0 h-16 bg-surface/90 backdrop-blur-lg border-t border-border flex justify-around items-center z-50",
+      "sidebar": "hidden md:flex flex-col w-64 h-screen bg-surface border-r border-border fixed left-0 top-0 p-4"
+    }
+  },
+  "visual_enhancers": {
+    "shadows": {
+      "neon": "0 0 10px rgba(16, 185, 129, 0.5)",
+      "depth": "0 10px 30px -10px rgba(0, 0, 0, 0.5)"
+    },
+    "borders": {
+      "glass": "1px solid rgba(255, 255, 255, 0.1)",
+      "active": "1px solid #3b82f6"
+    },
+    "textures": {
+      "noise": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E\")"
+    }
+  },
+  "motion": {
+    "page_transition": {
+      "initial": { "opacity": 0, "y": 10 },
+      "animate": { "opacity": 1, "y": 0 },
+      "exit": { "opacity": 0, "y": -10 },
+      "transition": { "duration": 0.3, "ease": "easeOut" }
+    },
+    "list_stagger": 0.05,
+    "micro_interactions": {
+      "button_tap": "scale-95",
+      "hover_lift": "translate-y-[-2px]"
+    }
+  },
+  "accessibility": {
+    "contrast_check": "Ensure all text on Slate 900 background is at least Slate 300.",
+    "focus_states": "visible ring-2 ring-primary ring-offset-2 ring-offset-background",
+    "touch_targets": "Minimum 44x44px for all mobile interactive elements."
+  },
+  "image_urls": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1770736929333-4fb8cd5a1657?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHw0fHxtb29keSUyMG1vZGVybiUyMHJlc3RhdXJhbnQlMjBpbnRlcmlvciUyMGRpbmluZyUyMGRhcmslMjBsaWdodGluZ3xlbnwwfHx8fDE3NzE4MDgyNTB8MA&ixlib=rb-4.1.0&q=85",
+      "desc": "Modern moody restaurant interior with warm lighting",
+      "category": "landing_hero"
+    },
+    "chef_haccp": {
+      "url": "https://images.unsplash.com/photo-1731156679850-e73fbc21564c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwzfHxjaGVmJTIwcGxhdGluZyUyMGZvb2QlMjBwcm9mZXNzaW9uYWwlMjBraXRjaGVuJTIwZGV0YWlsJTIwZm9jdXN8ZW58MHx8fHwxNzcxODA4MjUyfDA&ixlib=rb-4.1.0&q=85",
+      "desc": "Chef focused on plating/prep in professional kitchen",
+      "category": "haccp_feature"
+    },
+    "ingredients": {
+      "url": "https://images.unsplash.com/photo-1706605212111-cb4426970ab8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwzfHxmcmVzaCUyMHJhdyUyMHZlZ2V0YWJsZXMlMjBjcmF0ZSUyMG1hcmtldCUyMGFlc3RoZXRpY3N8ZW58MHx8fHwxNzcxODA4MjUzfDA&ixlib=rb-4.1.0&q=85",
+      "desc": "Fresh vegetables in crates for goods reception",
+      "category": "inventory_feature"
+    },
+    "cleaning": {
+      "url": "https://images.unsplash.com/photo-1769163658180-c44f17c693e6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwd2FpdGVyJTIwd2lwaW5nJTIwdGFibGUlMjBjbGVhbmluZ3xlbnwwfHx8fDE3NzE4MDgyNTR8MA&ixlib=rb-4.1.0&q=85",
+      "desc": "Staff wiping table for cleaning checklist context",
+      "category": "cleaning_feature"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Install 'lucide-react' for all icons.",
+    "Use 'recharts' for the analytics dashboard (Occupancy Rate, HACCP Scores).",
+    "Implement 'framer-motion' for page transitions and list staggering.",
+    "Use 'react-hook-form' + 'zod' for all forms (Reservations, HACCP Logs).",
+    "For the Floor Plan, use a CSS Grid approach with draggable elements if possible, or simple static grid for MVP.",
+    "HACCP Module MUST have digital signature capability (use a canvas pad or simple checkbox with user auth confirmation).",
+    "The 'Kitchen Ticket' card style is key for the Reservation List view - make it look like a physical paper ticket on a digital board.",
+    "Ensure Dark Mode is the DEFAULT for the Admin Dashboard.",
+    "For the Public Reservation Page, allow a Light/Dark toggle but default to Dark for premium feel."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic gradients. Use the defined 'glass' or 'hero_overlay' gradients.",
+    "Add 'data-testid' to every interactive element (buttons, inputs, cards).",
+    "Use 'sonner' for all toast notifications (Success, Error, HACCP Alerts).",
+    "Avoid 'transition-all'. Animate 'opacity', 'transform', 'colors' specifically.",
+    "Never use centered text for long paragraphs. Left align for readability.",
+    "Spacing is luxury. Don't crowd the HACCP forms. One question per 'screen' or section is better than a giant list on mobile."
+  ]
+}
